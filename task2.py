@@ -1,14 +1,34 @@
-# TODO Напишите функцию find_common_participants
-def find_common_participants(str1, str2, sp=","):
-    participants1 = str1.split(sp)
-    participants2 = str2.split(sp)
-    common = list(set(participants1).intersection(participants2))
-    common.sort()
-    return common
+# TODO импортировать необходимые молули
+
+import json
+import csv
 
 
-participants_first_group = "Иванов|Петров|Сидоров"
-participants_second_group = "Петров|Сидоров|Смирнов"
+INPUT_FILENAME = "input.csv"
+OUTPUT_FILENAME = "output.json"
 
-# TODO Провеьте работу функции с разделителем отличным от запятой
-print(find_common_participants(participants_first_group, participants_second_group, sp="|"))
+
+def task() -> None:
+    ...  # TODO считать содержимое csv файла
+
+    input_file = open(INPUT_FILENAME, "r")
+    output_file = open(OUTPUT_FILENAME, "w")
+    reader = csv.DictReader(input_file)
+    csv_to_json = []
+    for i in reader:
+        csv_to_json.append(i)
+
+
+    ...  # TODO Сериализовать в файл с отступами равными 4
+    json.dump(csv_to_json, output_file, indent=4)
+    output_file.close()
+    input_file.close()
+
+
+if __name__ == '__main__':
+    # Нужно для проверки
+    task()
+
+    with open(OUTPUT_FILENAME) as output_f:
+        for line in output_f:
+            print(line, end="")
